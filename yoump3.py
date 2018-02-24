@@ -17,13 +17,13 @@ for i in range(len(lines)):
     filename = audio.download(quiet=False)
 
     
-    print("====CONVERTING TO MP3====")
+    print("\n========CONVERTING TO MP3=======")
     m4a_audio = AudioSegment.from_file("{}.m4a".format(descr[1]), format="m4a")
     m4a_audio.export("{}/{}.mp3".format(folderD, descr[1]), format="mp3", bitrate="128k")
 
     os.remove("{}.m4a".format(descr[1]))
 
-    print("====SETTING THE METADATA====")
+    print("======SETTING THE METADATA======")
     namArq = "{}.mp3".format(descr[1])
     song = EasyID3("{}/{}".format(folderD, namArq))
     descSong = namArq.replace(".mp3","")
@@ -31,6 +31,7 @@ for i in range(len(lines)):
     song["title"] = title
     song["artist"] = artist
     song.save()
+    print("======DOWNLOAD COMPLETE======\n\n")
 
 
 
