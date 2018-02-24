@@ -15,7 +15,7 @@ for i in range(len(lines)):
     chckEx = "{}/{}.mp3".format(folderD,descr[1])
 
     if  os.path.isfile(chckEx) == True:
-        print("YOU ALREADY DOWNLOAD THIS FILE")
+        print("YOU ALREADY DOWNLOAD THIS FILE\n\n\n")
     else:
         audio = vid.getbestaudio("m4a")
         filename = audio.download(quiet=False)
@@ -34,7 +34,7 @@ for i in range(len(lines)):
         song["title"] = title
         song["artist"] = artist
         song.save()
-        print("======DOWNLOAD COMPLETE======\n\n")
+        print("======DOWNLOAD COMPLETE======\n\n\n")
 
 
 
