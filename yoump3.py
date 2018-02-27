@@ -12,7 +12,6 @@ folderD = "C:/Users/User/Documents/Python/Download Youtube/Downloads"
 
 def main():
     method = int(input("Type Download Method, 1 - from a txt file, 2 - from web scraping, 3 - from youtube playlist "))
-
     if method < 1 or method > 3:
         print("Select valid method")
     else:
