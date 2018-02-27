@@ -11,7 +11,7 @@ from mutagen.easyid3 import EasyID3
 folderD = "C:/Users/User/Documents/Python/Download Youtube/Downloads"
 
 def main():
-    method = int(input("Type Download Method, 1 - from a txt file, 2 - from web scraping, 3 - from youtube playlist "))
+    method = int(input("Type Download Method:\n1 - from a txt file,\n2 - from web scraping,\n3 - from youtube playlist\n"))
     if method < 1 or method > 3:
         print("Select valid method")
     else:
