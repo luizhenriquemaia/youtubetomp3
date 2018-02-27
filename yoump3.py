@@ -93,7 +93,6 @@ def convMp3(nameArq):
     os.remove("{}/{}.m4a".format(folderD, nameArq))
     return
 
-
 def setMetD(nameArq):
     print("======SETTING THE METADATA======")
     song = EasyID3("{}/{}.mp3".format(folderD, nameArq))
@@ -110,7 +109,7 @@ def showAvVid(soup, urlsRes):
         print("{} - {}".format(n, vid['title']))
         n += 1
     return(urlsRes)
-    
-        
+
+
 if __name__ == '__main__':
     main()
