@@ -27,17 +27,17 @@ def from_TxtFile(folderD):
     for i in range(len(lines)):
         vid = pafy.new(lines[i])
         descr = [vid.author, vid.title, vid.duration]
-        title = re.sub(r'([^\s\w]|)_+', '', descr[1])
-        title = title.replace("  ", " - ")
+        nameArq = re.sub(r'([^\s\w]|)_+', '', descr[1])
+        nameArq = nameArq.replace("  ", " - ")
         print('Autor {}, Título {}, Duraçao {}\n'.format(*descr))
-        chckEx = "{}/{}.mp3".format(folderD, title)
+        chckEx = "{}/{}.mp3".format(folderD, nameArq)
         
         if  os.path.isfile(chckEx) == True:
             print("YOU ALREADY DOWNLOAD THIS FILE")
         else:
-            download(vid, folderD, title)
-            convMp3(title, folderD)
-            setMetD(title, folderD)
+            download(vid, folderD, nameArq)
+            convMp3(nameArq, folderD)
+            setMetD(nameArq, folderD)
             print("======DOWNLOAD COMPLETE======\n\n")
     return
 
@@ -71,35 +71,33 @@ def from_Web(folderD):
             selected = input("Select the download: ")
             vid = pafy.new(urlsRes[int(selected)])
             descr = [vid.author, vid.title, vid.duration]
-            title = re.sub(r'([^\s\w]|_)+', '', descr[1])
-            title = title.replace("  ", " - ")
+            nameArq = re.sub(r'([^\s\w]|_)+', '', descr[1])
+            nameArq = nameArq.replace("  ", " - ")
             download(vid, folderD, title)
-            convMp3(title, folderD)
-            setMetD(title, folderD)
+            convMp3(nameArq, folderD)
+            setMetD(nameArq, folderD)
             print("======DOWNLOAD COMPLETE======\n\n")
             n += 1
     return
 
-def download(vid, folderD, title):
+def download(vid, folderD, nameArq):
     print("\n=======STARTING DOWNLOAD======")
     audio = vid.getbestaudio("m4a")
-    filename = audio.download(filepath='{}/{}.m4a'.format(folderD, title), quiet=False)
+    filename = audio.download(filepath='{}/{}.m4a'.format(folderD, nameArq), quiet=False)
     return
 
-def convMp3(title, folderD):
+def convMp3(nameArq, folderD):
     print("\n========CONVERTING TO MP3=======")
-    m4a_audio = AudioSegment.from_file("{}/{}.m4a".format(folderD, title), format="m4a")
-    m4a_audio.export("{}/{}.mp3".format(folderD, title), format="mp3", bitrate="128k")
-    os.remove("{}/{}.m4a".format(folderD, title))
+    m4a_audio = AudioSegment.from_file("{}/{}.m4a".format(folderD, nameArq), format="m4a")
+    m4a_audio.export("{}/{}.mp3".format(folderD, nameArq), format="mp3", bitrate="128k")
+    os.remove("{}/{}.m4a".format(folderD, nameArq))
     return
 
 
-def setMetD(title, folderD):
+def setMetD(nameArq, folderD):
     print("======SETTING THE METADATA======")
-    namArq = "{}.mp3".format(title)
-    song = EasyID3("{}/{}".format(folderD, namArq))
-    descSong = namArq.replace(".mp3","")
-    artist, title = descSong.split(" - ")
+    song = EasyID3("{}/{}.mp3".format(folderD, nameArq))
+    artist, title = nameArq.split(" - ")
     song["title"] = title
     song["artist"] = artist
     song.save()
