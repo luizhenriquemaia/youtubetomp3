@@ -23,6 +23,8 @@ def main():
             print("3")
 
 def from_TxtFile():
+    fileTxt = input("Enter the name of file ")
+    fileTxt = str(fileTxt) + ".txt"
     lines = [line.rstrip('\n') for line in open('musicas.txt')]
     for i in range(len(lines)):
         vid = pafy.new(lines[i])
