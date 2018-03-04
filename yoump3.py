@@ -23,9 +23,9 @@ def main():
             print("3")
 
 def from_TxtFile():
-    fileTxt = input("Enter the name of file ")
+    fileTxt = input("Type the Name of File ")
     fileTxt = str(fileTxt) + ".txt"
-    lines = [line.rstrip('\n') for line in open('musicas.txt')]
+    lines = [line.rstrip('\n') for line in open(fileTxt)]
     for i in range(len(lines)):
         vid = pafy.new(lines[i])
         descr = [vid.author, vid.title, vid.duration]
@@ -63,8 +63,7 @@ def from_Web():
         showAvVid(soup, urlsRes)
         n = 1
 
-        amountD = input("How many links do you want: ")
-        for vid in range(int(amountD)):
+        while True:
             if n > 1:
                 showAvVid(soup, urlsRes)
             else:
