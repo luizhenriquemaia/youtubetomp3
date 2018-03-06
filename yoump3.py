@@ -75,6 +75,7 @@ def from_Web():
             else:
                 vid = pafy.new(urlsRes[int(selected)])
                 descr = [vid.author, vid.title, vid.duration]
+                print("\n{}".format(descr[1]))
                 title = re.sub(r'([^\s\w]|_)+', '', descr[1])
                 title = title.replace("  ", " - ")
                 download(vid, title)
@@ -93,7 +94,7 @@ def showAvVid(soup, urlsRes):
     return(urlsRes)
 
 def download(vid, title):
-    print("\n=======STARTING DOWNLOAD======")
+    print("\n========STARTING DOWNLOAD=======")
     audio = vid.getbestaudio("m4a")
     filename = audio.download(filepath='{}/{}.m4a'.format(folderD, title), quiet=False)
     return
