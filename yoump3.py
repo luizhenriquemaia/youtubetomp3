@@ -49,7 +49,7 @@ def from_Web():
     song = input("Enter the song: ")
     descr = "{} -{}".format(artist, song)
     chckEx = "{}/{}.mp3".format(folderD, descr)
-    
+        
     if  os.path.isfile(chckEx) == True:
         print("YOU ALREADY DOWNLOAD THIS FILE")
     else:
@@ -68,17 +68,20 @@ def from_Web():
                 showAvVid(soup, urlsRes)
             else:
                 pass
-                
+                    
             selected = input("Select the download: ")
-            vid = pafy.new(urlsRes[int(selected)])
-            descr = [vid.author, vid.title, vid.duration]
-            title = re.sub(r'([^\s\w]|_)+', '', descr[1])
-            title = title.replace("  ", " - ")
-            download(vid, title)
-            convMp3(title)
-            setMetD(title)
-            print("======DOWNLOAD COMPLETE======\n\n")
-            n += 1
+            if selected == "back":
+                main()
+            else:
+                vid = pafy.new(urlsRes[int(selected)])
+                descr = [vid.author, vid.title, vid.duration]
+                title = re.sub(r'([^\s\w]|_)+', '', descr[1])
+                title = title.replace("  ", " - ")
+                download(vid, title)
+                convMp3(title)
+                setMetD(title)
+                print("======DOWNLOAD COMPLETE======\n\n")
+                n += 1
     return
 
 def showAvVid(soup, urlsRes):
